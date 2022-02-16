@@ -1,0 +1,17 @@
+
+.git
+.gitignore
+
+.env
+env*
+env.*
+
+Dockerfile
+.dockerignore
+
+README.md
+.DS_Store
+
+*.csv
+tmp
+__pycache__

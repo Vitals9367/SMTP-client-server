@@ -43,7 +43,7 @@ class SMTPclient:
             print(f"Failed to connect to {self.__constants['SMTP_SERVER']} SMTP server! \n {err}")
 
 
-    def send_message(self,msg):
+    def __send_message(self,msg):
         self.__smtp.send_message(msg)
         print("Email Sent!")
 
@@ -52,7 +52,7 @@ class SMTPclient:
         email = Email(self.__constants['SENDER'],reciever,topic)
         email.add_plain_text(text)
         
-        self.send_message(email.get_message())
+        self.__send_message(email.get_message())
 
 
     def send_html_email(self,reciever,topic,template):
@@ -61,4 +61,4 @@ class SMTPclient:
         html = open(f"HTMLTemplates/{template}.html")
         email.add_html(html)
 
-        self.send_message(email.get_message())
+        self.__send_message(email.get_message())

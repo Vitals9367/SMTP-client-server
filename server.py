@@ -38,6 +38,13 @@ def sendPlainEmail():
             return {"error" : err}, 400
 
 
+@app.route('/available-templates', methods=['GET'])
+def availableTemplates():
+    if request.method == 'GET':
+        tempaltes = os.listdir("./HTMLTemplates")
+        return {"templates" : tempaltes}, 200
+
+
 @app.route('/send-html-email', methods=['POST'])
 def sendHTMLEmail():
     if request.method == 'POST':

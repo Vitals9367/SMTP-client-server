@@ -1,5 +1,5 @@
 import smtplib, ssl
-from emailMessage import Email
+from email_message import Email
 
 
 class SMTPclient:
@@ -43,19 +43,22 @@ class SMTPclient:
             print(f"Failed to connect to {self.__constants['SMTP_SERVER']} SMTP server! \n {err}")
 
 
+    def send_message(self,msg):
+        self.__smtp.send_message(msg)
+        print("Email Sent!")
+
+
     def send_plain_text_email(self,reciever,topic,text):
         email = Email(self.__constants['SENDER'],reciever,topic)
         email.add_plain_text(text)
         
-        self.__smtp.send_message(email.get_message())
+        self.send_message(email.get_message())
 
 
     def send_html_email(self,reciever,topic,template):
         email = Email(self.__constants['SENDER'],reciever,topic)
 
-        html = open(f"HTMLTemplates/{template}")
-        email.add_html(html)
-        email.add_html(html)
+        html = open(f"HTMLTemplates/{template}.html")
         email.add_html(html)
 
-        self.__smtp.send_message(email.get_message())
+        self.send_message(email.get_message())
